@@ -33,13 +33,12 @@ struct ContentView: View {
         //            }
         
         return ("""
-                Name:\(name)
-                Email:\(email)
-                Phone Number:\(phone)
                 
-                Has reserved \(typeMeal) for \(numOfCustomers) customers.
+                Name: \(name)
+                Email: \(email)
+                Phone Number: \(phone)
                 
-                
+                Has reserved \(typeMeal) for \(Int(numOfCustomers)) customers.
                 
                 """)
     }
@@ -55,7 +54,7 @@ struct ContentView: View {
             alertMessage += "Phone number is required"
         }
         else{
-            alertMessage = "Form submitted successfully. "
+            alertMessage = "Form submitted successfully."
             alertMessage += reserverationMessage()
         }
         
