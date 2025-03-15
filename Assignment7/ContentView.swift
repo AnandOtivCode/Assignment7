@@ -69,8 +69,6 @@ struct ContentView: View {
     var body: some View {
         ScrollView{
             ZStack{
-                //Displays background color
-                Color("BackgroundColor").ignoresSafeArea(edges: .all)
                 VStack {
                     Text("Sushi Mart").font(.custom("IndieFlower", size: 60)).fontWeight(.heavy).foregroundColor(Color.red)
                     //Sushi Image
@@ -84,14 +82,13 @@ struct ContentView: View {
                             TextField(text: $name) {
                                 Text("Please enter your name")
                             }.textFieldStyle(.roundedBorder)
-                                .keyboardType(.numberPad)
-                            
+                                .keyboardType(.default)
                             //Email Input
                             Text("Email")
                             TextField(text: $email) {
                                 Text("Please enter your Email")
                             }.textFieldStyle(.roundedBorder)
-                                .keyboardType(.numberPad)
+                                .keyboardType(.emailAddress)
                             
                             //Phone Number Input
                             Text("Phone Number")
@@ -111,10 +108,10 @@ struct ContentView: View {
                                 Text("Breakfast").tag("Breakfast")
                                 Text("Lunch").tag("Lunch")
                                 Text("Dinner").tag("Dinner")
-                            } .pickerStyle(.segmented)
-                            
+                            } .pickerStyle(.segmented).padding()
+                        
                             //Submit Button
-                            Button("Ok", systemImage: "computermouse.fill"){
+                            Button("Submit", systemImage: "fork.knife"){
                                 isAlertShowing.toggle()
                             }.buttonStyle(.borderedProminent)
                                 .alert(isValidData(), isPresented: $isAlertShowing) {
@@ -135,8 +132,12 @@ struct ContentView: View {
                 }
                 
             }
-        }
+           
+        }//Fills the background color
+        .background(Color("BackgroundColor").ignoresSafeArea(edges: .all))
+        
     }
+    
 }
 
 #Preview {
