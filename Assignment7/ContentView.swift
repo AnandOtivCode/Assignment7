@@ -52,11 +52,14 @@ struct ContentView: View {
     }
     
 
-    
+
     
     
     var body: some View {
         VStack {
+            Text("Sushi Mart").font(.title2).fontWeight(.heavy).foregroundColor(Color.red)
+            //Sushi Image
+            Image("sushiPlate").resizable().frame(width: 200, height: 200)
             Section(header: Text("Reservation Form")
                 .font(.title2)
                 .fontWeight(.heavy)) {
