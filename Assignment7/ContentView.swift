@@ -21,17 +21,28 @@ struct ContentView: View {
     
     
     func reserverationMessage() -> String {
-        if typeMeal == "Breakfast" {
-            return "You have reserved a table for \(Int(numOfCustomers)) people for breakfast."
-        } else if typeMeal == "Lunch" {
-            return "You have reserved a table for \(Int(numOfCustomers)) people for lunch."
-        } else if typeMeal == "Dinner" {
-            return "You have reserved a table for \(Int(numOfCustomers)) people for dinner."
-        }
-            else{
-                return "You have reserved a table for \(Int(numOfCustomers)) people."
-            }
-        }
+        //        if typeMeal == "Breakfast" {
+        //            return "You have reserved a table for \(Int(numOfCustomers)) people for breakfast."
+        //        } else if typeMeal == "Lunch" {
+        //            return "You have reserved a table for \(Int(numOfCustomers)) people for lunch."
+        //        } else if typeMeal == "Dinner" {
+        //            return "You have reserved a table for \(Int(numOfCustomers)) people for dinner."
+        //        }
+        //            else{
+        //                return "You have reserved a table for \(Int(numOfCustomers)) people."
+        //            }
+        
+        return ("""
+                Name:\(name)
+                Email:\(email)
+                Phone Number:\(phone)
+                
+                Has reserved \(typeMeal) for \(numOfCustomers) customers.
+                
+                
+                
+                """)
+    }
     
     func isValidData() -> String {
         var alertMessage = ""
@@ -51,71 +62,79 @@ struct ContentView: View {
         return alertMessage
     }
     
-
-
+    
+    
     
     
     var body: some View {
-        VStack {
-            Text("Sushi Mart").font(.title2).fontWeight(.heavy).foregroundColor(Color.red)
-            //Sushi Image
-            Image("sushiPlate").resizable().frame(width: 200, height: 200)
-            Section(header: Text("Reservation Form")
-                .font(.title2)
-                .fontWeight(.heavy)) {
-                    Divider()
-                    //Name Input
-                    Text("Name")
-                    TextField(text: $name) {
-                        Text("Please enter your name")
-                    }.textFieldStyle(.roundedBorder)
-                        .keyboardType(.numberPad)
-                    
-                    //Email Input
-                    Text("Email")
-                    TextField(text: $email) {
-                        Text("Please enter your Email")
-                    }.textFieldStyle(.roundedBorder)
-                        .keyboardType(.numberPad)
-                    
-                    //Phone Number Input
-                    Text("Phone Number")
-                    TextField(text: $phone) {
-                        Text("Please enter your phone number    ")
-                    }.textFieldStyle(.roundedBorder)
-                        .keyboardType(.numberPad)
-                    
-                    //Number of Customers Input
-                    Text("Number of Customers: \(Int(numOfCustomers))")
-                    Slider(value: $numOfCustomers, in: 1...100, step: 1)
-                    
-                    //Get breakfast lunch or dinner value
-                    Picker("Meal", selection: $typeMeal){
-                        Text("Breakfast").tag("Breakfast")
-                        Text("Lunch").tag("Lunch")
-                        Text("Dinner").tag("Dinner")
-                    } .pickerStyle(.segmented)
-                    
-                    //Submit Button
-                    Button("Ok", systemImage: "computermouse.fill"){
-                        isAlertShowing.toggle()
-                    }.buttonStyle(.borderedProminent)
-                        .alert(isValidData(), isPresented: $isAlertShowing) {
+        ScrollView{
+            ZStack{
+                //Displays background color
+                Color("BackgroundColor").ignoresSafeArea(edges: .all)
+                VStack {
+                    Text("Sushi Mart").font(.custom("IndieFlower", size: 60)).fontWeight(.heavy).foregroundColor(Color.red)
+                    //Sushi Image
+                    Image("sushiPlate").resizable().frame(width: 200, height: 200)
+                    Section(header: Text("Reservation Form")
+                        .font(.title2)
+                        .fontWeight(.heavy)) {
+                            Divider()
+                            //Name Input
+                            Text("Name")
+                            TextField(text: $name) {
+                                Text("Please enter your name")
+                            }.textFieldStyle(.roundedBorder)
+                                .keyboardType(.numberPad)
+                            
+                            //Email Input
+                            Text("Email")
+                            TextField(text: $email) {
+                                Text("Please enter your Email")
+                            }.textFieldStyle(.roundedBorder)
+                                .keyboardType(.numberPad)
+                            
+                            //Phone Number Input
+                            Text("Phone Number")
+                            TextField(text: $phone) {
+                                Text("Please enter your phone number    ")
+                            }.textFieldStyle(.roundedBorder)
+                                .keyboardType(.numberPad)
+                            
+                            //Number of Customers Input
+                            Text("Number of Customers: \(Int(numOfCustomers))")
+                                .fontWeight(.heavy)
+                                .foregroundColor(Color.black)
+                            Slider(value: $numOfCustomers, in: 1...10, step: 1)
+                            
+                            //Get breakfast lunch or dinner value
+                            Picker("Meal", selection: $typeMeal){
+                                Text("Breakfast").tag("Breakfast")
+                                Text("Lunch").tag("Lunch")
+                                Text("Dinner").tag("Dinner")
+                            } .pickerStyle(.segmented)
+                            
+                            //Submit Button
+                            Button("Ok", systemImage: "computermouse.fill"){
+                                isAlertShowing.toggle()
+                            }.buttonStyle(.borderedProminent)
+                                .alert(isValidData(), isPresented: $isAlertShowing) {
+                                    
+                                    
+                                }
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             
                             
                         }
-                    
-
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                 }
-            
+                
+            }
         }
     }
 }
